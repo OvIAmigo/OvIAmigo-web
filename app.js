@@ -2,6 +2,12 @@
 (function () {
   "use strict";
   var OVI = window.OVI || {};
+  // si faltara config.js, la página igual muestra las redes
+  OVI.redes = OVI.redes || {
+    instagram: { url: "https://www.instagram.com/oviamigo", usuario: "@oviamigo" }, tiktok: { url: "https://www.tiktok.com/@oviamigo", usuario: "@oviamigo" },
+    youtube: { url: "https://www.youtube.com/@oviamigo", usuario: "@oviamigo" }, x: { url: "https://x.com/oviamigoo", usuario: "@oviamigoo" }
+  };
+  if (!("correo" in OVI)) OVI.correo = "armoaalen@gmail.com";
   var $ = function (id) { return document.getElementById(id); };
   var crear = function (tag, clase, texto) { var e = document.createElement(tag); if (clase) e.className = clase; if (texto != null) e.textContent = texto; return e; };
   var guaranies = function (n) { return "₲ " + String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, "."); };
@@ -195,6 +201,39 @@
   fetch("/api/videos").then(function (r) { if (!r.ok) throw 0; return r.json(); })
     .then(function (d) { var l = (d && d.videos) || []; pintarVideos(l.length ? l : manuales); })
     .catch(function () { pintarVideos(manuales); });
+
+  /* ================= TU RUBRO ================= */
+  var RUBROS = [
+    { n: "🍔 Comida", f: "Gastronomía o comida", i: [["💬", "Pedidos por WhatsApp a cualquier hora", "Un asistente que pasa el menú, toma el pedido y te avisa."], ["📸", "Publicaciones de la semana", "Textos y portadas para tus platos, listos para subir."], ["🌐", "Menú online con botón de pedido", "Una página simple que se abre desde tu bio."]] },
+    { n: "🩺 Salud", f: "Salud", i: [["📅", "Turnos online con recordatorio", "El paciente elige horario y recibe el aviso solo."], ["💬", "Respuestas a lo de siempre", "Horarios, ubicación y cómo agendar, sin que nadie atienda el teléfono."], ["📊", "Agenda ordenada", "Tu planilla de turnos conectada a tu calendario."]] },
+    { n: "💅 Estética", f: "Estética", i: [["📅", "Reservas sin ida y vuelta", "Tus clientas eligen día y hora desde el celular."], ["🔔", "Recordatorios automáticos", "Menos turnos perdidos por olvidos."], ["🎬", "Reels de tus trabajos", "Edición y portadas para mostrar lo que hacés."]] },
+    { n: "🏋️ Gimnasio", f: "Gimnasio", i: [["💬", "Precios y horarios al instante", "La consulta más repetida, respondida a cualquier hora."], ["🔔", "Avisos de clases y novedades", "Mensajes automáticos para tus socios."], ["🗓️", "Plan de contenido del mes", "Ideas y guiones para no quedarte sin publicar."]] },
+    { n: "🎓 Instituto", f: "Instituto o academia", i: [["📝", "Inscripciones con formulario online", "Los datos llegan ordenados a una planilla."], ["💬", "Consultas sobre cursos", "Un asistente que explica cursos, horarios y requisitos."], ["🧑‍🏫", "Capacitación en IA para docentes", "Para preparar clases y materiales en menos tiempo."]] },
+    { n: "🛍️ Tienda", f: "Tienda", i: [["🌐", "Catálogo web con botón de pedido", "Tus productos en una página fácil de compartir."], ["💬", "Asistente que responde precios", "Con la lista que vos le cargás y mantenés."], ["🖼️", "Fotos y videos de producto", "Miniaturas y reels que se entienden de un vistazo."]] },
+    { n: "💼 Profesional", f: "Servicios profesionales", i: [["🌐", "Página con tus servicios", "Con formulario para que te lleguen consultas claras."], ["📅", "Agenda de reuniones", "El cliente reserva y te aparece en el calendario."], ["✍️", "Borradores en minutos", "Propuestas, correos y publicaciones para revisar y enviar."]] },
+    { n: "🚀 Recién empiezo", f: "Emprendimiento nuevo", i: [["🔗", "Página de enlaces para tu bio", "Todo lo tuyo en un solo lugar desde el primer día."], ["💬", "WhatsApp Business bien configurado", "Catálogo, respuestas rápidas y mensaje de bienvenida."], ["🎨", "Imagen para tus redes", "Banner, foto de perfil y primeras publicaciones."]] }
+  ];
+  var rubrosBox = $("rubros"), ideasBox = $("ideas");
+  function verRubro(k) {
+    [].forEach.call(rubrosBox.children, function (b, i) { b.setAttribute("aria-selected", i === k ? "true" : "false"); });
+    ideasBox.innerHTML = "";
+    RUBROS[k].i.forEach(function (it) {
+      var c = crear("div", "idea-c"), d = crear("div");
+      c.appendChild(crear("span", "", it[0])); d.appendChild(crear("strong", "", it[1])); d.appendChild(crear("p", "", it[2])); c.appendChild(d); ideasBox.appendChild(c);
+    });
+    var pie = crear("div", "ideas-pie"), b = crear("button", "btn", "Quiero algo así para mi negocio"); b.type = "button";
+    b.addEventListener("click", function () {
+      $("f-negocio").value = RUBROS[k].f;
+      var m = $("f-msg"); if (!m.value.trim()) m.value = "Me interesa: " + RUBROS[k].i.map(function (x) { return x[1].toLowerCase(); }).join(", ") + ".";
+      $("hablemos").scrollIntoView(); setTimeout(function () { $("f-nombre").focus({ preventScroll: true }); }, 500);
+    });
+    pie.appendChild(b); ideasBox.appendChild(pie);
+  }
+  RUBROS.forEach(function (r, k) {
+    var b = crear("button", "rub", r.n); b.type = "button"; b.setAttribute("role", "tab");
+    b.addEventListener("click", function () { verRubro(k); }); rubrosBox.appendChild(b);
+  });
+  verRubro(0);
 
   /* ================= LA CUENTA ================= */
   var cP = $("c-pierde"), cV = $("c-venta"), cD = $("c-dias"), cuentaTxt = "";

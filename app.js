@@ -13,6 +13,62 @@
   var guaranies = function (n) { return "₲ " + String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, "."); };
   var sinTildes = function (t) { return t.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, ""); };
 
+  var reduce = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+
+  /* ================= ROBOT CON VIDA ================= */
+  // el mismo robot del logo, pero mueve los ojos hacia donde está el puntero, parpadea y saluda
+  var ROBOT = '<svg class="rv" viewBox="0 0 200 240"><g stroke="#13161B" stroke-linecap="round" stroke-linejoin="round">' +
+    '<path d="M100 42V20" stroke-width="6" fill="none"/><circle class="rv-antena" cx="100" cy="15" r="10" fill="#FFD60A" stroke-width="5"/>' +
+    '<rect x="20" y="76" width="22" height="46" rx="10" fill="#4DA3FF" stroke-width="6"/><rect x="158" y="76" width="22" height="46" rx="10" fill="#4DA3FF" stroke-width="6"/>' +
+    '<path d="M64 178Q40 182 38 204" stroke-width="18" fill="none"/><path d="M64 178Q40 182 38 204" stroke="#4DA3FF" stroke-width="9" fill="none"/><circle cx="38" cy="208" r="9" fill="#fff" stroke-width="5"/>' +
+    '<g class="rv-brazo"><path d="M138 174Q164 162 166 134" stroke-width="18" fill="none"/><path d="M138 174Q164 162 166 134" stroke="#4DA3FF" stroke-width="9" fill="none"/><circle cx="166" cy="128" r="9" fill="#fff" stroke-width="5"/></g>' +
+    '<rect x="72" y="208" width="24" height="22" rx="8" fill="#13161B" stroke-width="4"/><rect x="104" y="208" width="24" height="22" rx="8" fill="#13161B" stroke-width="4"/>' +
+    '<rect x="62" y="154" width="76" height="60" rx="20" fill="#4DA3FF" stroke-width="6"/><rect x="82" y="168" width="36" height="30" rx="7" fill="#FFD60A" stroke-width="4"/>' +
+    '<rect x="34" y="42" width="132" height="112" rx="36" fill="#fff" stroke-width="6"/><rect x="50" y="60" width="100" height="76" rx="26" fill="#13161B" stroke="none"/>' +
+    '<path d="M88 114Q100 126 112 114" stroke="#3FCF8E" stroke-width="5" fill="none"/></g>' +
+    '<g class="rv-ojos"><ellipse class="rv-ojo" cx="80" cy="92" rx="9" ry="14" fill="#3FCF8E"/><ellipse class="rv-ojo" cx="120" cy="92" rx="9" ry="14" fill="#3FCF8E"/></g>' +
+    '<ellipse cx="63" cy="114" rx="8" ry="5" fill="#FF4D8D"/><ellipse cx="137" cy="114" rx="8" ry="5" fill="#FF4D8D"/>' +
+    '<text x="100" y="191" text-anchor="middle" font-family="Bangers, Impact, sans-serif" font-size="22" fill="#13161B">IA</text></svg>';
+  var robots = [], miraX = 0, miraY = 0, cuadroPedido = false, ultimoMov = 0;
+  function robotVivo(caja) { caja.innerHTML = ROBOT; robots.push({ caja: caja, ojos: caja.querySelector(".rv-ojos") }); }
+  function moverOjos() {
+    cuadroPedido = false;
+    robots.forEach(function (r) {
+      var b = r.caja.getBoundingClientRect(); if (!b.width) return;
+      var dx = miraX - (b.left + b.width / 2), dy = miraY - (b.top + b.height * .4), d = Math.sqrt(dx * dx + dy * dy) || 1, f = Math.min(1, d / 160);
+      r.ojos.style.transform = "translate(" + (dx / d * 7 * f).toFixed(1) + "px," + (dy / d * 5 * f).toFixed(1) + "px)";
+    });
+  }
+  document.addEventListener("pointermove", function (e) {
+    miraX = e.clientX; miraY = e.clientY; ultimoMov = Date.now();
+    if (!cuadroPedido) { cuadroPedido = true; requestAnimationFrame(moverOjos); }
+  }, { passive: true });
+  // sin puntero (celular): mira para distintos lados cada tanto
+  if (!reduce) setInterval(function () {
+    if (Date.now() - ultimoMov < 3000) return;
+    var a = Math.random() * 6.283, x = (Math.cos(a) * 6).toFixed(1), y = (Math.sin(a) * 4).toFixed(1);
+    robots.forEach(function (r) { r.ojos.style.transform = "translate(" + x + "px," + y + "px)"; });
+  }, 2200);
+  if ($("robot-ia")) robotVivo($("robot-ia"));
+
+  /* ================= EFECTOS: HUMO Y PAPELITOS ================= */
+  function efecto(caja, tipo, cantidad) {
+    if (reduce || !caja) return;
+    var colores = ["#FF4D8D", "#4DA3FF", "#3FCF8E", "#FFD60A", "#13161B"];
+    for (var i = 0; i < cantidad; i++) {
+      var p = crear("i", "fx " + tipo), ang = Math.random() * 6.283, lejos = 70 + Math.random() * 110;
+      if (tipo === "humo-p") {
+        p.style.setProperty("--dx", Math.round((Math.random() - .5) * 220) + "px"); p.style.setProperty("--dy", Math.round(-90 - Math.random() * 110) + "px");
+        p.style.animationDelay = (i * 45) + "ms";
+      } else {
+        p.style.setProperty("--dx", Math.round(Math.cos(ang) * lejos) + "px"); p.style.setProperty("--dy", Math.round(Math.sin(ang) * lejos - 40) + "px");
+        p.style.setProperty("--r", Math.round((Math.random() - .5) * 720) + "deg"); p.style.setProperty("--c", colores[i % colores.length]);
+      }
+      caja.appendChild(p);
+      setTimeout(function (el) { el.remove(); }, 1900, p);
+    }
+  }
+
   /* ================= REDES ================= */
   var REDES = [
     { id: "instagram", nombre: "Instagram", detalle: "Reels e historias del día a día" },
@@ -52,7 +108,7 @@
 
   var RESPUESTAS = [
     [/impuesto|ruc|factur|\biva\b|tribut|dnit|contab/, "De impuestos y facturación no opino: eso se consulta con un contador de confianza. Lo mío es la IA aplicada a tu negocio 🤖"],
-    [/precio|cuesta|cuanto|costo|sale|cobr|presupuesto|tarifa/, "Depende de lo que necesites, y no te voy a inventar un número 😅 Dejá tus datos en la sección “Hablemos” y Ovi te pasa el precio después de conocer tu caso."],
+    [/precio|cuesta|cuanto|costo|sale|cobr|presupuesto|tarifa/, "Los precios están pensados para negocios que recién empiezan, pero no te voy a inventar un número 😅 Dejá tus datos en la sección “Hablemos” y Ovi te pasa el precio después de conocer tu caso."],
     [/whatsapp|wasap|wsp|responder|atender|mensaje|consulta/, "Se puede conectar tu WhatsApp Business a una IA que responde las preguntas de siempre (precios, horarios, cómo comprar) a cualquier hora. Lo difícil te lo pasa a vos. Sin humo: hay que configurarla bien y revisarla."],
     [/reemplaz|sin trabajo|despid|empleo|quitar|sacar el trabajo/, "La IA no viene a sacarte el trabajo: viene a sacarte lo repetitivo. Responder lo mismo veinte veces, armar borradores, ordenar planillas. Lo que sigue siendo tuyo: conocer a tu cliente y decidir."],
     [/web|pagina|sitio|enlace|turno|reserva/, "Ovi arma páginas para negocios, páginas de enlaces como la de su bio, y sistemas de turnos o reservas online. Contale qué necesitás en “Hablemos” y te dice qué te conviene."],
@@ -73,6 +129,17 @@
   function burbuja(quien, texto) {
     var b = crear("div", "burbuja " + quien, texto);
     log.appendChild(b); log.scrollTop = log.scrollHeight; return b;
+  }
+  // la respuesta aparece escribiéndose; el lector de pantalla recibe el texto entero de una vez
+  function escribir(b, texto, fin) {
+    if (reduce) { b.textContent = texto; fin(); return; }
+    var letras = Array.from(texto), i = 0, salto = Math.max(1, Math.ceil(letras.length / 80));
+    var visible = crear("span"); visible.setAttribute("aria-hidden", "true");
+    b.appendChild(crear("span", "solo-lector", texto)); b.appendChild(visible);
+    (function tic() {
+      i += salto; visible.textContent = letras.slice(0, i).join(""); log.scrollTop = log.scrollHeight;
+      if (i < letras.length) setTimeout(tic, 18); else { b.textContent = texto; fin(); }
+    })();
   }
   function pensando() {
     var b = crear("div", "burbuja ia pensando"); b.innerHTML = "<i></i><i></i><i></i>"; b.setAttribute("aria-label", "Escribiendo");
@@ -96,9 +163,9 @@
     var responder = function (r) {
       var falta = Math.max(0, 600 - (Date.now() - inicio));
       setTimeout(function () {
-        espera.remove(); burbuja("ia", r); historial.push({ role: "assistant", content: r });
+        espera.remove(); historial.push({ role: "assistant", content: r });
         if (historial.length > 12) historial = historial.slice(-12);
-        ocupado = false;
+        escribir(burbuja("ia", ""), r, function () { ocupado = false; });
       }, falta);
     };
     if (!iaDisponible) { responder(respuestaLocal(texto)); return; }
@@ -144,6 +211,8 @@
     veredicto.hidden = false; botones.hidden = true; sig.hidden = false;
     sig.textContent = n === FRASES.length - 1 ? "Ver mi resultado" : "Siguiente frase";
     pintarPuntos(); sig.focus({ preventScroll: true });
+    if (f.humo) efecto($("carta"), "humo-p", 9);
+    if (bien) efecto($("carta"), "fiesta", 18);
   }
   function resultado() {
     var total = FRASES.length;
@@ -262,12 +331,18 @@
   var elegidos = [], chips = {}, barra = crear("div", "barra-elegidos"), barraBtn = crear("a", "btn");
   barraBtn.href = "#hablemos"; barra.appendChild(barraBtn); barra.hidden = true; document.body.appendChild(barra);
   var enServicios = false;
+  // tarjetas de "Lo que hago": cada una marca uno o más servicios de la lista completa
+  var ofertas = [].slice.call(document.querySelectorAll(".oferta"));
+  var deOferta = function (o) { return o.getAttribute("data-serv").split("|"); };
+  var ofertaCompleta = function (o) { return deOferta(o).every(function (s) { return elegidos.indexOf(s) > -1; }); };
   function pintarElegidos() {
+    ofertas.forEach(function (o) { o.setAttribute("aria-pressed", ofertaCompleta(o) ? "true" : "false"); });
     var caja = $("elegidos"), k = elegidos.length;
     caja.hidden = !k; caja.innerHTML = "";
     if (k) { caja.appendChild(document.createTextNode("Te interesa:")); caja.appendChild(crear("span", "", elegidos.join(", "))); }
     barraBtn.textContent = "Pedir info de " + k + (k === 1 ? " servicio" : " servicios");
     barra.hidden = !(k && enServicios);
+    document.body.classList.toggle("con-barra", !barra.hidden);
   }
   function elegir(nombre, valor) {
     var i = elegidos.indexOf(nombre), poner = valor == null ? i < 0 : valor;
@@ -284,6 +359,9 @@
       chips[it] = b; fila.appendChild(b);
     });
     caja.appendChild(fila); $("grupos").appendChild(caja);
+  });
+  ofertas.forEach(function (o) {
+    o.addEventListener("click", function () { var poner = !ofertaCompleta(o); deOferta(o).forEach(function (s) { elegir(s, poner); }); });
   });
   if ("IntersectionObserver" in window) {
     new IntersectionObserver(function (es) { enServicios = es[0].isIntersecting; pintarElegidos(); }, { rootMargin: "-25% 0px -25% 0px" }).observe($("servicios"));
@@ -318,6 +396,134 @@
       .catch(function () { error("No se pudo enviar. Revisá tu conexión y tocá de nuevo “Enviar mis datos”."); })
       .finally(function () { fBtn.disabled = false; fBtn.textContent = "Enviar mis datos"; });
   });
+
+  /* ================= CONSOLA QUE ESCRIBE SOLA ================= */
+  (function () {
+    var el = $("tipeo"); if (!el || reduce) return;
+    var frases = ["armar tu página web", "editar tus videos", "atender tu WhatsApp con IA", "ordenar tus turnos", "diseñar tus portadas", "capacitar a tu equipo"];
+    var f = 0, i = frases[0].length, borrando = true;
+    function tic() {
+      var t = frases[f];
+      if (borrando) {
+        i -= 2;
+        if (i <= 0) { i = 0; el.textContent = ""; borrando = false; f = (f + 1) % frases.length; return setTimeout(tic, 320); }
+        el.textContent = t.slice(0, i); return setTimeout(tic, 24);
+      }
+      i++; el.textContent = t.slice(0, i);
+      if (i >= t.length) { borrando = true; return setTimeout(tic, 1900); }
+      setTimeout(tic, 46);
+    }
+    setTimeout(tic, 2600);
+  })();
+
+  /* ================= RED DE PUNTOS DEL INICIO ================= */
+  (function () {
+    var cv = $("red"); if (!cv || !cv.getContext) return;
+    var ctx = cv.getContext("2d"), hero = cv.parentNode, W = 0, H = 0, nodos = [], puntero = null, visible = true, corriendo = false, LEJOS = 140;
+    function medir() {
+      var r = hero.getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = r.width; H = r.height; cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      var cant = Math.max(22, Math.min(64, Math.round(W * H / 16000)));
+      while (nodos.length < cant) nodos.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - .5) * .38, vy: (Math.random() - .5) * .38, r: 1.6 + Math.random() * 2 });
+      nodos.length = cant;
+    }
+    function cuadro() {
+      ctx.clearRect(0, 0, W, H);
+      var i, j, a, b, dx, dy, d;
+      for (i = 0; i < nodos.length; i++) {
+        a = nodos[i]; a.x += a.vx; a.y += a.vy;
+        if (a.x < 0 || a.x > W) a.vx *= -1; if (a.y < 0 || a.y > H) a.vy *= -1;
+        a.x = Math.max(0, Math.min(W, a.x)); a.y = Math.max(0, Math.min(H, a.y));
+      }
+      ctx.lineWidth = 1.2;
+      for (i = 0; i < nodos.length; i++) for (j = i + 1; j < nodos.length; j++) {
+        a = nodos[i]; b = nodos[j]; dx = a.x - b.x; dy = a.y - b.y; d = Math.sqrt(dx * dx + dy * dy);
+        if (d < LEJOS) { ctx.strokeStyle = "rgba(19,22,27," + ((1 - d / LEJOS) * .24).toFixed(3) + ")"; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); }
+      }
+      if (puntero) {
+        ctx.lineWidth = 1.6;
+        for (i = 0; i < nodos.length; i++) {
+          a = nodos[i]; dx = a.x - puntero.x; dy = a.y - puntero.y; d = Math.sqrt(dx * dx + dy * dy);
+          if (d < 190) { ctx.strokeStyle = "rgba(255,77,141," + ((1 - d / 190) * .8).toFixed(3) + ")"; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(puntero.x, puntero.y); ctx.stroke(); }
+        }
+      }
+      ctx.fillStyle = "rgba(19,22,27,.42)";
+      for (i = 0; i < nodos.length; i++) { a = nodos[i]; ctx.beginPath(); ctx.arc(a.x, a.y, a.r, 0, 6.283); ctx.fill(); }
+      if (visible && !reduce && !document.hidden) requestAnimationFrame(cuadro); else corriendo = false;
+    }
+    function arrancar() { if (!corriendo) { corriendo = true; requestAnimationFrame(cuadro); } }
+    medir(); arrancar();
+    var espera; window.addEventListener("resize", function () { clearTimeout(espera); espera = setTimeout(function () { medir(); arrancar(); }, 150); });
+    document.addEventListener("visibilitychange", function () { if (!document.hidden && visible) arrancar(); });
+    hero.addEventListener("pointermove", function (e) { var r = hero.getBoundingClientRect(); puntero = { x: e.clientX - r.left, y: e.clientY - r.top }; }, { passive: true });
+    hero.addEventListener("pointerleave", function () { puntero = null; });
+    if ("IntersectionObserver" in window) new IntersectionObserver(function (es) { visible = es[0].isIntersecting; if (visible) arrancar(); }).observe(hero);
+  })();
+
+  /* ================= TARJETAS: EL BRILLO SIGUE AL PUNTERO ================= */
+  if (!reduce && window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    [].forEach.call(document.querySelectorAll(".oferta"), function (o) {
+      o.addEventListener("pointermove", function (e) {
+        var r = o.getBoundingClientRect();
+        o.style.setProperty("--mx", Math.round((e.clientX - r.left) / r.width * 100) + "%"); o.style.setProperty("--my", Math.round((e.clientY - r.top) / r.height * 100) + "%");
+      });
+    });
+  }
+
+  /* ================= BARRA DE AVANCE ================= */
+  (function () {
+    var barraAvance = $("progreso"); if (!barraAvance) return;
+    var pedido = false;
+    function pintar() { pedido = false; var alto = document.documentElement.scrollHeight - window.innerHeight; barraAvance.style.transform = "scaleX(" + (alto > 0 ? Math.min(1, window.scrollY / alto) : 0).toFixed(4) + ")"; }
+    window.addEventListener("scroll", function () { if (!pedido) { pedido = true; requestAnimationFrame(pintar); } }, { passive: true });
+    pintar();
+  })();
+
+  /* ================= EL ROBOT COMENTA CADA SECCIÓN ================= */
+  // Para cambiar lo que dice, editá estos textos. Para que no hable en una sección, borrá su línea.
+  (function () {
+    var COMENTARIOS = {
+      "esto-hago": "¡Hola! Soy la IA de Ovi 🤖 Tocá lo que te interese y lo llevo al formulario.",
+      "videos": "Un video nuevo por día. Yo no me pierdo ninguno 👀",
+      "detector": "A mí no me mires, yo ya sé las respuestas.",
+      "rubro": "Yo no cobro por dar ideas. Aprovechá 😎",
+      "cuenta": "Mové los números. Duele un poquito, pero sirve 😬",
+      "servicios": "Acá está la lista completa, sin letra chica.",
+      "redes": "Seguilo en las redes. Yo también trabajo ahí 🤖"
+    };
+    var filas = [];
+    Object.keys(COMENTARIOS).forEach(function (id) {
+      var sec = $(id), intro = sec && sec.querySelector(".intro"); if (!intro) return;
+      var fila = crear("p", "robot-dice"), cara = crear("span", "robot-vivo"); cara.setAttribute("aria-hidden", "true");
+      fila.appendChild(cara); robotVivo(cara); fila.appendChild(crear("span", "rd-txt", COMENTARIOS[id]));
+      intro.insertAdjacentElement("afterend", fila); filas.push(fila);
+    });
+    if (reduce || !("IntersectionObserver" in window)) { filas.forEach(function (f) { f.classList.add("visto"); }); return; }
+    var obs = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("visto"); obs.unobserve(e.target); } });
+    }, { rootMargin: "0px 0px -16% 0px" });
+    filas.forEach(function (f) { obs.observe(f); });
+  })();
+
+  /* ================= EL ROBOT FLOTANTE: ATAJO AL CHAT ================= */
+  (function () {
+    var caja = crear("div", "guia oculta"), btn = crear("button", "guia-btn"), cara = crear("div", "robot-vivo");
+    btn.type = "button"; btn.title = "Charlá con mi IA"; btn.setAttribute("aria-label", "Ir al chat con la IA de OvIAmigo");
+    btn.appendChild(cara); robotVivo(cara); caja.appendChild(btn); document.body.appendChild(caja);
+    btn.addEventListener("click", function () { $("ia").scrollIntoView(); });
+    if (!("IntersectionObserver" in window)) { caja.classList.remove("oculta"); return; }
+    // en el inicio, en el chat y en el formulario se esconde para no tapar nada
+    var obs = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) caja.classList.toggle("oculta", /^(inicio|ia|hablemos)$/.test(e.target.id)); });
+    }, { rootMargin: "-45% 0px -45% 0px" });
+    [].forEach.call(document.querySelectorAll("main > section[id]"), function (sec) { obs.observe(sec); });
+  })();
+
+  /* tocar la foto de Ovi tira papelitos */
+  (function () {
+    var foto = $("hero-foto"); if (!foto) return;
+    foto.addEventListener("click", function () { efecto(foto, "fiesta", 24); });
+  })();
 
   /* botón de WhatsApp: aparece solo cuando cargás el número en config.js */
   var wa = String(OVI.whatsapp || "").replace(/\D/g, "");

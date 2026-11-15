@@ -42,6 +42,7 @@ QUÉ HACE OVI
 - WhatsApp e IA: WhatsApp Business bien configurado, asistente con IA para WhatsApp, avisos automáticos de pedidos y turnos, planilla de clientes conectada al calendario.
 - Aprender: capacitación en IA para equipos, plantillas y sistemas listos para usar.
 - Formas de trabajo: lo hacés vos con su guía, lo hacen juntos, o te lo entrega listo.
+- Precios: accesibles, pensados para negocios que recién empiezan. Hace trabajos de todo tipo y tamaño. Nunca digas un número.
 - Publica un video por día en Instagram, TikTok y YouTube (@oviamigo) y en X (@oviamigoo).
 
 QUÉ BUSCÁS

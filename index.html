@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>OvIAmigo | IA sin humo y con humor para tu negocio</title>
-<meta name="description" content="Ovi te muestra cómo usar inteligencia artificial en tu negocio de Paraguay: WhatsApp atendido por IA, páginas web, contenido y capacitación. Sin promesas mágicas.">
+<meta name="description" content="Páginas web, recorte y edición de videos, WhatsApp atendido por IA, turnos online y capacitación para negocios de Paraguay que recién empiezan. A bajo costo y sin promesas mágicas.">
 <meta name="theme-color" content="#FFD60A">
 <link rel="canonical" href="https://oviamigo.com/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://oviamigo.com/">
 <meta property="og:title" content="OvIAmigo | IA sin humo y con humor">
-<meta property="og:description" content="Preguntale a mi IA, jugá al detector de humo y mirá un video nuevo por día.">
+<meta property="og:description" content="Páginas web, edición de videos y WhatsApp atendido por IA, a bajo costo para negocios que recién empiezan.">
 <meta property="og:image" content="https://oviamigo.com/compartir.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="avatar.jpg">
@@ -48,22 +48,25 @@
 <header class="top">
   <a class="logo" href="#inicio" aria-label="OvIAmigo, inicio"><svg class="robot" aria-hidden="true"><use href="#robot"/></svg><span class="logo-txt">Ov<b>IA</b>migo</span></a>
   <nav class="menu" aria-label="Secciones">
+    <a href="#esto-hago">Servicios</a>
     <a href="#ia">Mi IA</a>
-    <a href="#detector">Detector de humo</a>
     <a href="#videos">Videos</a>
+    <a href="#detector">Detector de humo</a>
     <a href="#rubro">Tu rubro</a>
-    <a href="#servicios">Servicios</a>
   </nav>
   <a class="btn chico" href="#hablemos">Hablemos</a>
+  <i class="progreso" id="progreso" aria-hidden="true"></i>
 </header>
 
 <main>
 
 <!-- ============ INICIO ============ -->
 <section class="hero" id="inicio">
+  <canvas class="red-neuronal" id="red" aria-hidden="true"></canvas>
   <i class="cf c1"></i><i class="cf c2"></i><i class="cf c3"></i><i class="cf c4"></i><i class="cf c5"></i><i class="cf c6"></i><i class="cf c7"></i><i class="cf c8"></i><i class="cf c9"></i><i class="cf c10"></i>
   <div class="ancho hero-grid">
-    <div class="hero-foto">
+    <div class="hero-foto" id="hero-foto">
+      <i class="orbita"></i><i class="orbita o2"></i>
       <span class="foto" role="img" aria-label="Ovi, el creador de OvIAmigo"></span>
       <span class="pegatina p1">🚭 Sin humo</span>
       <span class="pegatina p2">😄 Con humor</span>
@@ -75,7 +78,16 @@
         <span>IA sin humo</span> <span>y con humor</span>
         <i class="nube n1"></i><i class="nube n2"></i><i class="nube n3"></i><i class="nube n4"></i><i class="nube n5"></i>
       </h1>
-      <p class="bajada">Soy Ovi. Te muestro cómo usar inteligencia artificial en tu negocio de Paraguay 🇵🇾, explicada en criollo y sin promesas mágicas.</p>
+      <p class="consola" aria-hidden="true"><b>▸ Puedo</b><span id="tipeo">armar tu página web</span><i class="cursor"></i></p>
+      <p class="bajada">Soy Ovi. Ayudo a negocios de Paraguay 🇵🇾 que recién empiezan, a bajo costo y sin promesas mágicas. Esto hago:</p>
+      <ul class="hero-serv">
+        <li><a href="#esto-hago">🌐 Páginas web</a></li>
+        <li><a href="#esto-hago">🎬 Recorte y edición de videos</a></li>
+        <li><a href="#esto-hago">🤖 WhatsApp con IA</a></li>
+        <li><a href="#esto-hago">📅 Turnos online</a></li>
+        <li><a href="#esto-hago">🎨 Diseño para redes</a></li>
+        <li><a href="#esto-hago">🧑‍🏫 Capacitación en IA</a></li>
+      </ul>
       <div class="hero-botones">
         <a class="btn grande rosa" href="#ia">🤖 Preguntale a mi IA</a>
         <a class="btn grande" href="#videos">▶ Mirá los videos</a>
@@ -92,18 +104,59 @@
   </div>
 </div>
 
+<!-- ============ LO QUE HAGO ============ -->
+<section class="ofrezco" id="esto-hago">
+  <div class="ancho">
+    <div class="ofrezco-cab">
+      <h2 class="titulo">Lo que hago por tu negocio</h2>
+      <span class="sello-precio">💸 Bajo costo</span>
+    </div>
+    <p class="intro">Trabajos de todo tipo y tamaño, a precios pensados para negocios que recién empiezan. Tocá lo que te interesa y te paso el precio antes de empezar.</p>
+    <div class="ofertas">
+      <button class="oferta" type="button" aria-pressed="false" data-serv="🌐 Página web para tu negocio|🔗 Página de enlaces para tu bio">
+        <span class="oferta-ico">🌐</span><strong>Páginas web</strong>
+        <span class="oferta-txt">Para tu negocio, tu catálogo o el enlace de tu bio.</span>
+      </button>
+      <button class="oferta" type="button" aria-pressed="false" data-serv="🎬 Edición de videos y reels">
+        <span class="oferta-ico">🎬</span><strong>Recorte y edición de videos</strong>
+        <span class="oferta-txt">Reels, Shorts y TikToks con subtítulos y portada.</span>
+      </button>
+      <button class="oferta" type="button" aria-pressed="false" data-serv="💬 WhatsApp Business bien configurado|🤖 Asistente con IA para WhatsApp">
+        <span class="oferta-ico">🤖</span><strong>WhatsApp atendido por IA</strong>
+        <span class="oferta-txt">Un asistente que responde a tus clientes a cualquier hora.</span>
+      </button>
+      <button class="oferta" type="button" aria-pressed="false" data-serv="📅 Turnos y reservas online">
+        <span class="oferta-ico">📅</span><strong>Turnos y reservas online</strong>
+        <span class="oferta-txt">Tus clientes agendan solos y a vos te llega el aviso.</span>
+      </button>
+      <button class="oferta" type="button" aria-pressed="false" data-serv="🖼️ Miniaturas y portadas|🎨 Banners y fotos de perfil|🗓️ Plan de contenido del mes">
+        <span class="oferta-ico">🎨</span><strong>Diseño para tus redes</strong>
+        <span class="oferta-txt">Miniaturas, banners, foto de perfil y plan de contenido.</span>
+      </button>
+      <button class="oferta" type="button" aria-pressed="false" data-serv="🧑‍🏫 Capacitación en IA para tu equipo">
+        <span class="oferta-ico">🧑‍🏫</span><strong>Capacitación en IA</strong>
+        <span class="oferta-txt">Para vos o tu equipo, con ejemplos de tu propio negocio.</span>
+      </button>
+    </div>
+    <div class="ofrezco-pie">
+      <a class="btn grande rosa" href="#hablemos">Pedir mi presupuesto</a>
+      <a class="enlace" href="#servicios">Ver la lista completa de servicios</a>
+    </div>
+  </div>
+</section>
+
 <!-- ============ MI IA ============ -->
-<section class="ia" id="ia">
+<section class="ia-escena" id="ia">
   <div class="ancho ia-grid">
     <div class="ia-txt">
-      <svg class="robot ia-robot" aria-hidden="true"><use href="#robot"/></svg>
+      <div class="robot-vivo" id="robot-ia" aria-hidden="true"></div>
       <h2 class="titulo">Preguntale a mi IA</h2>
       <p class="intro">Este robot es una muestra de lo que puedo poner a atender en tu negocio. Probalo: preguntale lo que quieras sobre IA.</p>
     </div>
-    <div class="chat" aria-label="Chat con la IA de OvIAmigo">
+    <div class="chat-marco"><div class="chat" aria-label="Chat con la IA de OvIAmigo">
       <div class="chat-top">
         <svg class="robot" aria-hidden="true"><use href="#robot"/></svg>
-        <div><strong>La IA de OvIAmigo</strong><span id="chat-estado">Responde al toque, a cualquier hora</span></div>
+        <div><strong>La IA de OvIAmigo</strong><span id="chat-estado">En línea, a cualquier hora</span></div>
       </div>
       <div class="chat-log" id="chat-log" role="log" aria-live="polite"></div>
       <div class="chat-ideas" id="chat-ideas"></div>
@@ -112,7 +165,21 @@
         <button type="submit" aria-label="Enviar pregunta">➤</button>
       </form>
       <p class="chat-nota">Es una IA y puede equivocarse. Para algo importante, <a href="#hablemos">dejale tus datos a Ovi</a>.</p>
-    </div>
+    </div></div>
+  </div>
+</section>
+
+<!-- ============ VIDEOS ============ -->
+<section class="videos" id="videos">
+  <div class="ancho">
+    <h2 class="titulo">Un video por día</h2>
+    <p class="intro">Trucos, pruebas y metidas de pata con IA, en menos de un minuto. Tocá uno para verlo acá mismo.</p>
+  </div>
+  <div class="tira" id="tira" tabindex="0" aria-label="Últimos videos de OvIAmigo"></div>
+  <div class="ancho videos-pie">
+    <a class="btn rojo" data-red="youtube" href="#" target="_blank" rel="noopener"><svg><use href="#i-youtube"/></svg> Suscribite en YouTube</a>
+    <a class="btn" data-red="tiktok" href="#" target="_blank" rel="noopener"><svg><use href="#i-tiktok"/></svg> Seguime en TikTok</a>
+    <a class="btn" data-red="instagram" href="#" target="_blank" rel="noopener"><svg><use href="#i-instagram"/></svg> Seguime en Instagram</a>
   </div>
 </section>
 
@@ -155,20 +222,6 @@
       <span class="pegatina h1">¿Humo?</span>
       <span class="pegatina h2">¿O real?</span>
     </div>
-  </div>
-</section>
-
-<!-- ============ VIDEOS ============ -->
-<section class="videos" id="videos">
-  <div class="ancho">
-    <h2 class="titulo">Un video por día</h2>
-    <p class="intro">Trucos, pruebas y metidas de pata con IA, en menos de un minuto. Tocá uno para verlo acá mismo.</p>
-  </div>
-  <div class="tira" id="tira" tabindex="0" aria-label="Últimos videos de OvIAmigo"></div>
-  <div class="ancho videos-pie">
-    <a class="btn rojo" data-red="youtube" href="#" target="_blank" rel="noopener"><svg><use href="#i-youtube"/></svg> Suscribite en YouTube</a>
-    <a class="btn" data-red="tiktok" href="#" target="_blank" rel="noopener"><svg><use href="#i-tiktok"/></svg> Seguime en TikTok</a>
-    <a class="btn" data-red="instagram" href="#" target="_blank" rel="noopener"><svg><use href="#i-instagram"/></svg> Seguime en Instagram</a>
   </div>
 </section>
 
@@ -216,8 +269,8 @@
 <!-- ============ SERVICIOS ============ -->
 <section class="servicios" id="servicios">
   <div class="ancho">
-    <h2 class="titulo">Esto puedo hacer por tu negocio</h2>
-    <p class="intro">Tocá lo que te interese. Lo que elijas viaja solo al formulario de abajo.</p>
+    <h2 class="titulo">Todos los servicios, uno por uno</h2>
+    <p class="intro">La lista completa. Tocá lo que te interese y viaja solo al formulario de abajo.</p>
     <div class="grupos" id="grupos"></div>
 
     <h3 class="subtitulo">Así trabajamos</h3>

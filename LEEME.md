@@ -53,5 +53,8 @@ Tu proyecto > **Custom domains** > **Set up a custom domain** > `oviamigo.com`. 
 - **Cambiar el correo de los pedidos:** en `config.js`, línea `correo`. La primera vez FormSubmit manda un correo para activar: hay que confirmarlo.
 - **Si no aparecen los videos:** en `config.js`, pegá los códigos en `videos: ["codigo1", "codigo2"]`.
 - **Apagar la IA:** en `config.js`, `chatConIA: false`.
+- **Cambiar las frases que se escriben solas en el inicio ("Puedo…"):** en `app.js`, la lista `frases` de "CONSOLA QUE ESCRIBE SOLA".
+- **Cambiar lo que comenta el robot en cada sección:** en `app.js`, la lista `COMENTARIOS`. Si borrás una línea, en esa sección no habla.
+- **Editar los servicios del inicio:** en `index.html`, la lista `hero-serv` (las pastillas) y la sección "LO QUE HAGO" (las tarjetas).
 - **Editar frases del detector, rubros o servicios:** en `app.js`, listas `FRASES`, `RUBROS` y `SERVICIOS`.
 - **Cambiar cómo habla la IA:** en `_worker.js`, el texto `INSTRUCCIONES`.

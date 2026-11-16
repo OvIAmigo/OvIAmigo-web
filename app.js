@@ -4,8 +4,8 @@
   var OVI = window.OVI || {};
   // si faltara config.js, la página igual muestra las redes
   OVI.redes = OVI.redes || {
-    instagram: { url: "https://www.instagram.com/oviamigo", usuario: "@oviamigo" }, tiktok: { url: "https://www.tiktok.com/@oviamigo", usuario: "@oviamigo" },
-    youtube: { url: "https://www.youtube.com/@oviamigo", usuario: "@oviamigo" }, x: { url: "https://x.com/oviamigoo", usuario: "@oviamigoo" }
+    instagram: { url: "https://www.instagram.com/oviamigoo", usuario: "@oviamigoo" }, tiktok: { url: "https://www.tiktok.com/@oviamigo", usuario: "@oviamigo" },
+    youtube: { url: "https://www.youtube.com/@oviamigoo", usuario: "@oviamigoo" }, x: { url: "https://x.com/oviamigoo", usuario: "@oviamigoo" }
   };
   if (!("correo" in OVI)) OVI.correo = "armoaalen@gmail.com";
   var $ = function (id) { return document.getElementById(id); };

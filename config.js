@@ -6,7 +6,7 @@ window.OVI = {
   // Tus redes
   redes: {
     instagram: { url: "https://www.instagram.com/oviamigoo", usuario: "@oviamigoo" },
-    tiktok:    { url: "https://www.tiktok.com/@oviamigoo",   usuario: "@oviamigoo" },
+    tiktok:    { url: "https://www.tiktok.com/@oviamigo",    usuario: "@oviamigo" },
     youtube:   { url: "https://www.youtube.com/@oviamigoo",  usuario: "@oviamigoo" },
     x:         { url: "https://x.com/oviamigoo",            usuario: "@oviamigoo" }
   },

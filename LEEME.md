@@ -32,7 +32,7 @@ Si habías cargado la clave `ANTHROPIC_API_KEY` en Cloudflare, ya no hace falta:
 - **El robot al lado del avatar** abre el chat al tocarlo.
 - `servicios.html` ahora tiene 21 servicios, con un grupo nuevo: "Dominio y más cosas con IA" (dominio y correo, imágenes, voz y subtítulos, textos, presentaciones e informes, planillas y reportes).
 - Se sacaron el detector de humo y la calculadora de "¿Cuánto te cuesta responder tarde?".
-- Los videos los trae `_worker.js` del canal `@oviamigoo`.
+- Los videos los trae `_worker.js` del canal `@oviamigoo` de YouTube. En TikTok el usuario es `@oviamigo` (sin la segunda o).
 
 ## Tu WhatsApp
 

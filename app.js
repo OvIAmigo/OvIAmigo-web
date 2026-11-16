@@ -550,7 +550,7 @@
   // el robot de al lado del avatar cambia de frase para llamar la atención
   (function () {
     var bu = $("rl-burbuja"); if (!bu || reduce) return;
-    var fr = ["¿Dudas? Preguntame 👋", "¿Cuánto cuesta una web?", "¿Me sirve la IA?", "Tengo +10.000 respuestas"], i = 0;
+    var fr = ["¿Dudas? 👋", "¿Cuánto sale?", "¿Me sirve la IA?", "Preguntame"], i = 0;
     setInterval(function () { if (document.hidden) return; i = (i + 1) % fr.length; bu.classList.remove("rl-cambia"); void bu.offsetWidth; bu.textContent = fr[i]; bu.classList.add("rl-cambia"); }, 4200);
   })();
 

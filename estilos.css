@@ -80,7 +80,7 @@ section { padding: 64px 0; }
 .hero-serv a { display: block; text-decoration: none; font-weight: 800; font-size: 15px; line-height: 1.2; padding: 8px 12px; background: var(--paper); border: 2px solid var(--ink); border-radius: 999px; box-shadow: 2px 2px 0 var(--ink); }
 .hero-serv a:hover { background: var(--ink); color: var(--sun); }
 .hero-botones { display: grid; gap: 12px; margin-bottom: 22px; }
-.btn.rosa { background: var(--pop); color: #fff; }
+.btn.rosa { background: #2B2F9E; color: #fff; }
 
 /* papelitos */
 .cf { position: absolute; width: 14px; height: 14px; pointer-events: none; }
@@ -337,7 +337,7 @@ input[type=range]::-moz-range-thumb { width: 24px; height: 24px; border-radius: 
 .tel input { border: 0; border-radius: 0; }
 .miel { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 .f-error { margin: 0; padding: 10px 14px; border-radius: 12px; background: #FFE1EB; border: 2px solid var(--pop); font-weight: 700; font-size: 15px; }
-.formu .btn.grande { background: var(--pop); color: #fff; }
+.formu .btn.grande { background: #2B2F9E; color: #fff; }
 .elegidos { padding: 12px 14px; border-radius: 12px; background: #E3F8EE; border: 2px solid var(--ink); font-size: 14px; font-weight: 700; }
 .elegidos span { display: block; font-weight: 500; margin-top: 4px; }
 .gracias-t { font-family: var(--titulos); font-size: 48px; line-height: 1; margin: 0; }
@@ -581,14 +581,14 @@ button.pegatina.p2 { animation-delay: -1.2s, 2s; } button.pegatina.p3 { animatio
 @keyframes llamar { 0% { box-shadow: 3px 3px 0 var(--ink), 0 0 0 0 rgba(255, 255, 255, .95); } 100% { box-shadow: 3px 3px 0 var(--ink), 0 0 0 18px rgba(255, 255, 255, 0); } }
 
 /* el robot que acompaña al avatar */
-.robot-lado { position: absolute; left: -9%; bottom: -17%; z-index: 4; display: flex; align-items: flex-end; gap: 0; padding: 0; border: 0; background: none; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.robot-lado { position: absolute; left: 3%; bottom: -3%; z-index: 4; display: flex; align-items: flex-end; gap: 0; padding: 0; border: 0; background: none; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 .rl-robot { display: block; width: clamp(64px, 17vw, 96px); animation: flotar 4s ease-in-out infinite; filter: drop-shadow(2px 0 0 #fff) drop-shadow(-2px 0 0 #fff) drop-shadow(0 2px 0 #fff) drop-shadow(0 -2px 0 #fff) drop-shadow(0 0 18px rgba(92, 170, 255, .85)); }
 .rl-burbuja { position: relative; order: 2; margin: 0 0 8% -4px; padding: 7px 11px; max-width: 150px; border: var(--borde); border-radius: 14px 14px 14px 4px; background: #fff; color: var(--ink); font-weight: 800; font-size: 14px; line-height: 1.2; text-align: left; box-shadow: 3px 3px 0 var(--ink); transform-origin: 0 100%; }
 .rl-burbuja.rl-cambia { animation: burbuja-pop .35s cubic-bezier(.2, 1.6, .4, 1); }
 @keyframes burbuja-pop { from { transform: scale(.6); opacity: 0; } }
 .robot-lado:hover .rl-burbuja, .robot-lado:focus-visible .rl-burbuja { background: var(--sun); }
-@media (min-width: 900px) { .robot-lado { left: -13%; bottom: -20%; } .rl-robot { width: 104px; } .rl-burbuja { font-size: 15px; max-width: 168px; } .p3 { bottom: 34%; } }
-@media (max-width: 899px) { .robot-lado { left: -3%; bottom: -19%; } .p3 { bottom: 33%; } .hero-foto { margin-bottom: 40px; } }
+@media (min-width: 900px) { .robot-lado { left: 2%; bottom: -2%; } .rl-robot { width: 118px; } .rl-burbuja { font-size: 15px; max-width: 124px; margin-bottom: 40%; } .p3 { bottom: 40%; left: -17%; } }
+@media (max-width: 899px) { .robot-lado { left: 0; bottom: -4%; } .rl-robot { width: 78px; } .rl-burbuja { max-width: 112px; font-size: 13px; margin-bottom: 36%; } .p3 { bottom: 38%; } .hero-foto { margin-bottom: 24px; } }
 
 /* ventana de los stickers */
 .ventana-pop { max-width: 460px; background: var(--paper); color: var(--ink); border: var(--borde); border-radius: 22px; box-shadow: 8px 8px 0 var(--sun); padding: 24px 20px 20px; overflow-y: auto; }
@@ -607,3 +607,28 @@ button.pegatina.p2 { animation-delay: -1.2s, 2s; } button.pegatina.p3 { animatio
 .pop-acciones .btn.rosa { flex: 1 1 100%; }
 @media (prefers-reduced-motion: reduce) { button.pegatina, button.pegatina.tocada, .rl-robot, .rl-burbuja.rl-cambia { animation: none; } button.pegatina { transform: rotate(var(--giro, 0deg)); } }
 .sv-grupo:nth-of-type(5) .sv-ico { background: var(--pop); }
+
+
+/* ---------- ajustes: pantalla 2 oscura (como el fondo del robot), pie chico, robot sobre el avatar ---------- */
+.mas { background: radial-gradient(circle at 88% 6%, rgba(150, 70, 170, .5), transparent 42%), radial-gradient(circle at 6% 96%, rgba(77, 163, 255, .22), transparent 40%), linear-gradient(180deg, #121738 0%, #0B0F24 100%); border-top: var(--borde); color: #E8EEFF; }
+.mas .titulo { color: var(--sun); text-shadow: 0 0 22px rgba(255, 214, 10, .35); }
+.mas .intro { color: #C3CEF0; }
+.mas .rub { border-color: #0B0F24; box-shadow: 3px 3px 0 rgba(124, 177, 255, .6); }
+.mas .rub[aria-selected=true] { box-shadow: 3px 3px 0 var(--pop); }
+.mas .idea-c { border-color: #0B0F24; box-shadow: 4px 4px 0 var(--sun); }
+.mas .ideas-pie .btn { background: var(--sun); color: var(--ink); box-shadow: 4px 4px 0 rgba(124, 177, 255, .6); }
+.mas-videos { border-color: #0B0F24; box-shadow: 8px 8px 0 var(--sun); }
+@media (min-width: 1020px) { .mas .idea-c { box-shadow: 3px 3px 0 var(--sun); } }
+
+/* pie de página: una sola fila, mucho más bajo */
+.pie { padding: 14px 0 16px; border-top: 3px solid var(--sun); }
+.pie-grid { grid-template-columns: auto 1fr; align-items: center; gap: 4px 16px; justify-items: stretch; }
+.pie .logo .robot { width: 28px; height: 34px; }
+.pie .logo-txt { font-size: 26px; -webkit-text-stroke-width: 0; padding: 0; }
+.pie .redes-fila { justify-self: end; gap: 8px; flex-wrap: nowrap; }
+.pie .icono { width: 38px; height: 38px; border-radius: 11px; box-shadow: 3px 3px 0 var(--sun); border-width: 2px; }
+.pie .icono svg { width: 19px; height: 19px; }
+.pie p { grid-column: 1 / -1; grid-row: 2; font-size: 12.5px; color: #AEB4C0; line-height: 1.35; }
+@media (min-width: 760px) { .pie-grid { grid-template-columns: auto 1fr auto; } .pie p { grid-column: 2; grid-row: 1; justify-self: center; text-align: center; } .pie .redes-fila { grid-column: 3; } }
+.mas .rub, .mas .idea-c, .mas-videos { color: var(--ink); }
+.mas .rub[aria-selected=true] { color: var(--ink); }

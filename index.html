@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="es-PY">
+<html lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>OvIAmigo | IA sin humo y con humor para tu negocio</title>
-<meta name="description" content="Páginas web, recorte y edición de videos, WhatsApp atendido por IA, turnos online y capacitación para negocios de Paraguay que recién empiezan. A bajo costo y sin promesas mágicas.">
+<meta name="description" content="Páginas web, recorte y edición de videos, WhatsApp atendido por IA, turnos online y capacitación para negocios que recién empiezan, en Paraguay y en cualquier país. A bajo costo y sin promesas mágicas.">
 <meta name="theme-color" content="#FFD60A">
 <link rel="canonical" href="https://oviamigo.com/">
 <meta property="og:type" content="website">
@@ -45,22 +45,21 @@
   </symbol>
 </svg>
 
+
 <header class="top">
-  <a class="logo" href="#inicio" aria-label="OvIAmigo, inicio"><svg class="robot" aria-hidden="true"><use href="#robot"/></svg><span class="logo-txt">Ov<b>IA</b>migo</span></a>
+  <a class="logo" href="./" aria-label="OvIAmigo, inicio"><svg class="robot" aria-hidden="true"><use href="#robot"/></svg><span class="logo-txt">Ov<b>IA</b>migo</span></a>
   <nav class="menu" aria-label="Secciones">
-    <a href="#esto-hago">Servicios</a>
-    <a href="#ia">Mi IA</a>
-    <a href="#videos">Videos</a>
-    <a href="#detector">Detector de humo</a>
+    <a href="servicios.html">Servicios</a>
     <a href="#rubro">Tu rubro</a>
+    <a href="#videos">Videos</a>
+    <a href="#chat" data-abrir="chat">Preguntale al robot</a>
   </nav>
-  <a class="btn chico" href="#hablemos">Hablemos</a>
-  <i class="progreso" id="progreso" aria-hidden="true"></i>
+  <a class="btn chico" href="#hablemos" data-abrir="form">Hablemos</a>
 </header>
 
 <main>
 
-<!-- ============ INICIO ============ -->
+<!-- ============ PANTALLA 1: INICIO ============ -->
 <section class="hero" id="inicio">
   <canvas class="red-neuronal" id="red" aria-hidden="true"></canvas>
   <i class="cf c1"></i><i class="cf c2"></i><i class="cf c3"></i><i class="cf c4"></i><i class="cf c5"></i><i class="cf c6"></i><i class="cf c7"></i><i class="cf c8"></i><i class="cf c9"></i><i class="cf c10"></i>
@@ -68,10 +67,14 @@
     <div class="hero-foto" id="hero-foto">
       <i class="orbita"></i><i class="orbita o2"></i>
       <span class="foto" role="img" aria-label="Ovi, el creador de OvIAmigo"></span>
-      <span class="pegatina p1">🚭 Sin humo</span>
-      <span class="pegatina p2">😄 Con humor</span>
-      <span class="pegatina p3">💼 Para pymes</span>
-      <span class="pegatina p4">🗓️ Un video por día</span>
+      <button class="pegatina p1" type="button" data-peg="humo" aria-haspopup="dialog">🚭 Sin humo</button>
+      <button class="pegatina p2" type="button" data-peg="humor" aria-haspopup="dialog">😄 Con humor</button>
+      <button class="pegatina p3" type="button" data-peg="pymes" aria-haspopup="dialog">💼 Para pymes</button>
+      <button class="pegatina p4" type="button" data-peg="video" aria-haspopup="dialog">🗓️ Un video por día</button>
+      <button class="robot-lado" id="robot-lado" type="button" data-abrir="chat" aria-label="Preguntale al robot de OvIAmigo">
+        <span class="rl-burbuja" id="rl-burbuja">¿Dudas? Preguntame 👋</span>
+        <span class="rl-robot" id="robot-hero" aria-hidden="true"></span>
+      </button>
     </div>
     <div class="hero-txt">
       <h1 class="titular">
@@ -79,278 +82,46 @@
         <i class="nube n1"></i><i class="nube n2"></i><i class="nube n3"></i><i class="nube n4"></i><i class="nube n5"></i>
       </h1>
       <p class="consola" aria-hidden="true"><b>▸ Puedo</b><span id="tipeo">armar tu página web</span><i class="cursor"></i></p>
-      <p class="bajada">Soy Ovi. Ayudo a negocios de Paraguay 🇵🇾 que recién empiezan, a bajo costo y sin promesas mágicas. Esto hago:</p>
+      <p class="bajada">Soy Ovi, de Paraguay 🇵🇾. Ayudo a negocios de cualquier país que recién empiezan, a bajo costo y sin promesas mágicas. Esto hago:</p>
       <ul class="hero-serv">
-        <li><a href="#esto-hago">🌐 Páginas web</a></li>
-        <li><a href="#esto-hago">🎬 Recorte y edición de videos</a></li>
-        <li><a href="#esto-hago">🤖 WhatsApp con IA</a></li>
-        <li><a href="#esto-hago">📅 Turnos online</a></li>
-        <li><a href="#esto-hago">🎨 Diseño para redes</a></li>
-        <li><a href="#esto-hago">🧑‍🏫 Capacitación en IA</a></li>
+        <li><a href="servicios.html#web">🌐 Páginas web</a></li>
+        <li><a href="servicios.html#videos">🎬 Recorte y edición de videos</a></li>
+        <li><a href="servicios.html#asistente">🤖 WhatsApp con IA</a></li>
+        <li><a href="servicios.html#turnos">📅 Turnos online</a></li>
+        <li><a href="servicios.html#miniaturas">🎨 Diseño para redes</a></li>
+        <li><a href="servicios.html#capacitacion">🧑‍🏫 Capacitación en IA</a></li>
+        <li><a href="servicios.html#dominio">🏷️ Dominio y correo</a></li>
+        <li><a href="servicios.html#imagenes">✨ Más cosas con IA</a></li>
       </ul>
       <div class="hero-botones">
-        <a class="btn grande rosa" href="#ia">🤖 Preguntale a mi IA</a>
-        <a class="btn grande" href="#videos">▶ Mirá los videos</a>
+        <a class="btn grande rosa" href="#chat" data-abrir="chat">🤖 Hacé tu pregunta</a>
+        <a class="btn grande" href="servicios.html">Ver todos mis servicios</a>
       </div>
       <div class="redes-fila" data-redes="iconos"></div>
     </div>
   </div>
+  <a class="bajar" href="#rubro" aria-label="Seguir bajando">↓</a>
 </section>
 
-<div class="cinta" aria-hidden="true">
-  <div class="cinta-pista">
-    <span>Sin humo</span><span>Con humor</span><span>Para pymes</span><span>Un video por día</span><span>Hecho en Paraguay</span><span>WhatsApp, webs y turnos</span>
-    <span>Sin humo</span><span>Con humor</span><span>Para pymes</span><span>Un video por día</span><span>Hecho en Paraguay</span><span>WhatsApp, webs y turnos</span>
-  </div>
-</div>
-
-<!-- ============ LO QUE HAGO ============ -->
-<section class="ofrezco" id="esto-hago">
-  <div class="ancho">
-    <div class="ofrezco-cab">
-      <h2 class="titulo">Lo que hago por tu negocio</h2>
-      <span class="sello-precio">💸 Bajo costo</span>
+<!-- ============ PANTALLA 2: TU RUBRO + VIDEOS ============ -->
+<section class="mas" id="mas">
+  <div class="ancho mas-grid">
+    <div class="mas-rubro" id="rubro">
+      <h2 class="titulo">¿Qué hace la IA en un negocio como el tuyo?</h2>
+      <p class="intro">Elegí tu rubro y mirá tres ideas concretas para empezar.</p>
+      <div class="rubros" id="rubros" role="tablist" aria-label="Rubros"></div>
+      <div class="ideas" id="ideas" aria-live="polite"></div>
     </div>
-    <p class="intro">Trabajos de todo tipo y tamaño, a precios pensados para negocios que recién empiezan. Tocá lo que te interesa y te paso el precio antes de empezar.</p>
-    <div class="ofertas">
-      <button class="oferta" type="button" aria-pressed="false" data-serv="🌐 Página web para tu negocio|🔗 Página de enlaces para tu bio">
-        <span class="oferta-ico">🌐</span><strong>Páginas web</strong>
-        <span class="oferta-txt">Para tu negocio, tu catálogo o el enlace de tu bio.</span>
-      </button>
-      <button class="oferta" type="button" aria-pressed="false" data-serv="🎬 Edición de videos y reels">
-        <span class="oferta-ico">🎬</span><strong>Recorte y edición de videos</strong>
-        <span class="oferta-txt">Reels, Shorts y TikToks con subtítulos y portada.</span>
-      </button>
-      <button class="oferta" type="button" aria-pressed="false" data-serv="💬 WhatsApp Business bien configurado|🤖 Asistente con IA para WhatsApp">
-        <span class="oferta-ico">🤖</span><strong>WhatsApp atendido por IA</strong>
-        <span class="oferta-txt">Un asistente que responde a tus clientes a cualquier hora.</span>
-      </button>
-      <button class="oferta" type="button" aria-pressed="false" data-serv="📅 Turnos y reservas online">
-        <span class="oferta-ico">📅</span><strong>Turnos y reservas online</strong>
-        <span class="oferta-txt">Tus clientes agendan solos y a vos te llega el aviso.</span>
-      </button>
-      <button class="oferta" type="button" aria-pressed="false" data-serv="🖼️ Miniaturas y portadas|🎨 Banners y fotos de perfil|🗓️ Plan de contenido del mes">
-        <span class="oferta-ico">🎨</span><strong>Diseño para tus redes</strong>
-        <span class="oferta-txt">Miniaturas, banners, foto de perfil y plan de contenido.</span>
-      </button>
-      <button class="oferta" type="button" aria-pressed="false" data-serv="🧑‍🏫 Capacitación en IA para tu equipo">
-        <span class="oferta-ico">🧑‍🏫</span><strong>Capacitación en IA</strong>
-        <span class="oferta-txt">Para vos o tu equipo, con ejemplos de tu propio negocio.</span>
-      </button>
-    </div>
-    <div class="ofrezco-pie">
-      <a class="btn grande rosa" href="#hablemos">Pedir mi presupuesto</a>
-      <a class="enlace" href="#servicios">Ver la lista completa de servicios</a>
-    </div>
-  </div>
-</section>
-
-<!-- ============ MI IA ============ -->
-<section class="ia-escena" id="ia">
-  <div class="ancho ia-grid">
-    <div class="ia-txt">
-      <div class="robot-vivo" id="robot-ia" aria-hidden="true"></div>
-      <h2 class="titulo">Preguntale a mi IA</h2>
-      <p class="intro">Este robot es una muestra de lo que puedo poner a atender en tu negocio. Probalo: preguntale lo que quieras sobre IA.</p>
-    </div>
-    <div class="chat-marco"><div class="chat" aria-label="Chat con la IA de OvIAmigo">
-      <div class="chat-top">
-        <svg class="robot" aria-hidden="true"><use href="#robot"/></svg>
-        <div><strong>La IA de OvIAmigo</strong><span id="chat-estado">En línea, a cualquier hora</span></div>
-      </div>
-      <div class="chat-log" id="chat-log" role="log" aria-live="polite"></div>
-      <div class="chat-ideas" id="chat-ideas"></div>
-      <form class="chat-form" id="chat-form" autocomplete="off">
-        <input id="chat-in" type="text" maxlength="400" placeholder="Escribí tu pregunta" aria-label="Tu pregunta">
-        <button type="submit" aria-label="Enviar pregunta">➤</button>
-      </form>
-      <p class="chat-nota">Es una IA y puede equivocarse. Para algo importante, <a href="#hablemos">dejale tus datos a Ovi</a>.</p>
-    </div></div>
-  </div>
-</section>
-
-<!-- ============ VIDEOS ============ -->
-<section class="videos" id="videos">
-  <div class="ancho">
-    <h2 class="titulo">Un video por día</h2>
-    <p class="intro">Trucos, pruebas y metidas de pata con IA, en menos de un minuto. Tocá uno para verlo acá mismo.</p>
-  </div>
-  <div class="tira" id="tira" tabindex="0" aria-label="Últimos videos de OvIAmigo"></div>
-  <div class="ancho videos-pie">
-    <a class="btn rojo" data-red="youtube" href="#" target="_blank" rel="noopener"><svg><use href="#i-youtube"/></svg> Suscribite en YouTube</a>
-    <a class="btn" data-red="tiktok" href="#" target="_blank" rel="noopener"><svg><use href="#i-tiktok"/></svg> Seguime en TikTok</a>
-    <a class="btn" data-red="instagram" href="#" target="_blank" rel="noopener"><svg><use href="#i-instagram"/></svg> Seguime en Instagram</a>
-  </div>
-</section>
-
-<!-- ============ DETECTOR DE HUMO ============ -->
-<section class="humo" id="detector">
-  <div class="ancho humo-grid">
-    <div>
-      <h2 class="titulo">Detector de humo</h2>
-      <p class="intro">Sobre la IA se dice de todo. Te muestro una frase y vos decidís: ¿es humo o es real?</p>
-
-      <div class="juego" id="juego">
-        <div class="puntos" id="puntos" aria-hidden="true"></div>
-        <div class="carta" id="carta" aria-live="polite">
-          <p class="frase" id="frase"></p>
-          <div class="veredicto" id="veredicto" hidden>
-            <span class="sello" id="sello"></span>
-            <p id="porque"></p>
-          </div>
-        </div>
-        <div class="juego-botones" id="juego-botones">
-          <button class="btn grande b-humo" type="button" data-resp="humo">💨 Humo</button>
-          <button class="btn grande b-real" type="button" data-resp="real">✅ Real</button>
-        </div>
-        <button class="btn grande b-sig" id="siguiente" type="button" hidden>Siguiente frase</button>
-      </div>
-
-      <div class="final" id="final" hidden>
-        <p class="final-num" id="final-num"></p>
-        <p class="final-txt" id="final-txt"></p>
-        <p class="final-inv">En mis videos desarmo un humo nuevo cada día. Seguime y no te lo venden más:</p>
-        <div class="redes-fila claro" data-redes="botones"></div>
-        <div class="final-acc">
-          <button class="btn" id="compartir" type="button">Compartir mi resultado</button>
-          <button class="btn fantasma" id="otra" type="button">Jugar de nuevo</button>
-        </div>
+    <div class="mas-videos" id="videos">
+      <h2 class="titulo-v">Un video por día</h2>
+      <p class="intro-v">Trucos y metidas de pata con IA, en menos de un minuto. Tocá uno para escucharlo.</p>
+      <div class="tira" id="tira" aria-label="Últimos videos de OvIAmigo"></div>
+      <div class="videos-pie">
+        <a class="btn rojo" data-red="youtube" href="#" target="_blank" rel="noopener"><svg><use href="#i-youtube"/></svg> YouTube</a>
+        <a class="btn" data-red="tiktok" href="#" target="_blank" rel="noopener"><svg><use href="#i-tiktok"/></svg> TikTok</a>
+        <a class="btn" data-red="instagram" href="#" target="_blank" rel="noopener"><svg><use href="#i-instagram"/></svg> Instagram</a>
       </div>
     </div>
-    <div class="humo-arte" aria-hidden="true">
-      <span class="humo-emoji">💨</span>
-      <span class="pegatina h1">¿Humo?</span>
-      <span class="pegatina h2">¿O real?</span>
-    </div>
-  </div>
-</section>
-
-<!-- ============ TU RUBRO ============ -->
-<section class="rubro" id="rubro">
-  <div class="ancho">
-    <h2 class="titulo">¿Qué hace la IA en un negocio como el tuyo?</h2>
-    <p class="intro">Elegí tu rubro y te muestro tres ideas concretas para empezar.</p>
-    <div class="rubros" id="rubros" role="tablist" aria-label="Rubros"></div>
-    <div class="ideas" id="ideas" aria-live="polite"></div>
-  </div>
-</section>
-
-<!-- ============ LA CUENTA ============ -->
-<section class="cuenta" id="cuenta">
-  <div class="ancho cuenta-grid">
-    <div>
-      <h2 class="titulo">¿Cuánto te cuesta responder tarde?</h2>
-      <p class="intro">Cada consulta que queda sin respuesta es una venta que se va a otro lado. Mové los números y hacé tu cuenta.</p>
-      <div class="campos">
-        <label class="campo">
-          <span>Consultas que se te escapan por día <output id="o-pierde">1</output></span>
-          <input type="range" id="c-pierde" min="1" max="20" value="1">
-        </label>
-        <label class="campo">
-          <span>Lo que vale una venta tuya <output id="o-venta">₲ 200.000</output></span>
-          <input type="range" id="c-venta" min="20000" max="1500000" step="10000" value="200000">
-        </label>
-        <label class="campo">
-          <span>Días que atendés por mes <output id="o-dias">26</output></span>
-          <input type="range" id="c-dias" min="4" max="31" value="26">
-        </label>
-      </div>
-    </div>
-    <div class="ticket" aria-live="polite">
-      <p class="ticket-arriba">Se te escapan por mes</p>
-      <p class="ticket-num" id="c-total">₲ 5.200.000</p>
-      <p class="ticket-abajo" id="c-anio">₲ 62.400.000 en un año</p>
-      <p class="ticket-nota">Cuenta aproximada: supone que cada consulta sin responder era una venta.</p>
-      <button class="btn grande" id="c-quiero" type="button">Quiero dejar de perder ventas</button>
-    </div>
-  </div>
-</section>
-
-<!-- ============ SERVICIOS ============ -->
-<section class="servicios" id="servicios">
-  <div class="ancho">
-    <h2 class="titulo">Todos los servicios, uno por uno</h2>
-    <p class="intro">La lista completa. Tocá lo que te interese y viaja solo al formulario de abajo.</p>
-    <div class="grupos" id="grupos"></div>
-
-    <h3 class="subtitulo">Así trabajamos</h3>
-    <ol class="pasos">
-      <li><strong>Me contás tu caso</strong>Dejás tus datos y te escribo. El diagnóstico es gratis.</li>
-      <li><strong>Te digo qué sirve y qué no</strong>Si la IA no es para tu negocio, te lo digo antes de que gastes un guaraní.</li>
-      <li><strong>Lo armamos a tu manera</strong>Lo hacés vos con mi guía, lo hacemos juntos, o te lo entrego listo.</li>
-    </ol>
-  </div>
-</section>
-
-<!-- ============ HABLEMOS ============ -->
-<section class="hablemos" id="hablemos">
-  <div class="ancho hablemos-grid">
-    <div>
-      <span class="foto mediana" role="img" aria-label="Ovi"></span>
-      <h2 class="titulo">Hablemos</h2>
-      <p class="intro">Dejame tus datos y te escribo yo a tu WhatsApp. Contame tu caso y te digo, sin vueltas, si la IA te sirve o no.</p>
-      <ul class="promesas">
-        <li>Te respondo yo, no un robot.</li>
-        <li>Si la IA no es para tu caso, te lo digo.</li>
-        <li>No uso tu número para nada más.</li>
-      </ul>
-      <a class="btn wa" id="wa-btn" href="#" target="_blank" rel="noopener" hidden>💬 Escribime por WhatsApp</a>
-    </div>
-
-    <form class="formu" id="formu" novalidate>
-      <div class="elegidos" id="elegidos" hidden></div>
-      <label class="f">
-        <span>Tu nombre</span>
-        <input id="f-nombre" type="text" autocomplete="given-name" maxlength="60" required>
-      </label>
-      <label class="f">
-        <span>Tu WhatsApp</span>
-        <span class="tel"><b>🇵🇾 +595</b><input id="f-tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="981 123 456" required></span>
-      </label>
-      <label class="f">
-        <span>Tu negocio</span>
-        <select id="f-negocio">
-          <option>Gastronomía o comida</option><option>Salud</option><option>Estética</option><option>Gimnasio</option>
-          <option>Instituto o academia</option><option>Tienda</option><option>Servicios profesionales</option>
-          <option>Emprendimiento nuevo</option><option>Otro</option>
-        </select>
-      </label>
-      <label class="f">
-        <span>¿Qué querés resolver? <em>(opcional)</em></span>
-        <textarea id="f-msg" rows="3" maxlength="600" placeholder="Ej.: respondo tarde el WhatsApp y pierdo pedidos"></textarea>
-      </label>
-      <input id="f-miel" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" class="miel">
-      <p class="f-error" id="f-error" role="alert" hidden></p>
-      <button class="btn grande" id="f-enviar" type="submit">Enviar mis datos</button>
-    </form>
-
-    <div class="gracias" id="gracias" hidden>
-      <p class="gracias-t">¡Recibido! 🙌</p>
-      <p>Ya tengo tus datos y te escribo a tu WhatsApp para coordinar. Mientras tanto, mirá los videos:</p>
-      <div class="redes-fila" data-redes="botones"></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ PREGUNTAS ============ -->
-<section class="dudas" id="dudas">
-  <div class="ancho dudas-grid">
-    <h2 class="titulo">Lo que todos me preguntan</h2>
-    <div class="acordeon">
-      <details><summary>¿Tengo que saber de tecnología?</summary><p>No. Si sabés usar WhatsApp, podés usar lo que armamos. Te lo dejo explicado paso a paso y en castellano.</p></details>
-      <details><summary>¿Cuánto cuesta?</summary><p>Depende de lo que necesites. Primero vemos tu caso, que es gratis, y después te paso el precio antes de empezar nada.</p></details>
-      <details><summary>¿La IA le va a contestar cualquier cosa a mis clientes?</summary><p>Responde con la información que le cargamos: tus precios, horarios y forma de atender. Lo que no sabe, te lo pasa a vos. Y se revisa: una IA sin control sí mete la pata.</p></details>
-      <details><summary>¿Y si la IA no sirve para mi negocio?</summary><p>Pasa, y te lo voy a decir. Prefiero perder un trabajo que venderte humo.</p></details>
-    </div>
-  </div>
-</section>
-
-<!-- ============ REDES ============ -->
-<section class="seguime" id="redes">
-  <div class="ancho">
-    <h2 class="titulo">Seguime y aprendé gratis</h2>
-    <p class="intro">El mismo Ovi en todas partes. Elegí dónde te queda más cómodo.</p>
-    <div class="tarjetas" id="tarjetas"></div>
   </div>
 </section>
 
@@ -359,10 +130,78 @@
 <footer class="pie">
   <div class="ancho pie-grid">
     <span class="logo"><svg class="robot" aria-hidden="true"><use href="#robot"/></svg><span class="logo-txt">Ov<b>IA</b>migo</span></span>
-    <p>IA sin humo y con humor. Hecho en Paraguay 🇵🇾</p>
+    <p>IA sin humo y con humor. Hecho en Paraguay 🇵🇾 para negocios de cualquier país 🌎</p>
     <div class="redes-fila claro" data-redes="iconos"></div>
   </div>
 </footer>
+
+<!-- ============ VENTANA: CHAT ============ -->
+<dialog class="ventana ventana-chat" id="v-chat" aria-label="Preguntale al robot de OvIAmigo">
+  <button class="cerrar" type="button" data-cerrar aria-label="Cerrar">✕</button>
+  <div class="chat-marco"><div class="chat" aria-label="Chat de preguntas de OvIAmigo">
+    <div class="chat-top">
+      <svg class="robot" aria-hidden="true"><use href="#robot"/></svg>
+      <div><strong>El robot de OvIAmigo</strong><span id="chat-estado">Respuestas al toque</span></div>
+    </div>
+    <div class="chat-log" id="chat-log" role="log" aria-live="polite"></div>
+    <div class="chat-ideas" id="chat-ideas"></div>
+    <form class="chat-form" id="chat-form" autocomplete="off">
+      <input id="chat-in" type="text" maxlength="300" placeholder="Escribí tu pregunta" aria-label="Tu pregunta">
+      <button type="submit" aria-label="Enviar pregunta">➤</button>
+    </form>
+    <p class="chat-nota">Son respuestas preparadas, no una IA en vivo. ¿Preferís hablar con Ovi? <a id="chat-ovi" href="#hablemos" data-abrir="form">dejale tus datos</a>.</p>
+  </div></div>
+</dialog>
+
+<!-- ============ VENTANA: HABLEMOS ============ -->
+<dialog class="ventana ventana-form" id="hablemos" aria-label="Hablemos">
+  <button class="cerrar" type="button" data-cerrar aria-label="Cerrar">✕</button>
+  <div class="form-cab">
+    <span class="foto mediana" role="img" aria-label="Ovi"></span>
+    <h2 class="titulo">Hablemos</h2>
+    <p>Dejame tus datos y te escribo yo a tu WhatsApp. Te digo, sin vueltas, si la IA te sirve o no.</p>
+  </div>
+  <form class="formu" id="formu" novalidate>
+    <div class="elegidos" id="elegidos" hidden></div>
+    <label class="f">
+      <span>Tu nombre</span>
+      <input id="f-nombre" type="text" autocomplete="given-name" maxlength="60" required>
+    </label>
+    <div class="f">
+      <label for="f-tel">Tu WhatsApp <em>(tocá la bandera para cambiar de país)</em></label>
+      <span class="tel">
+        <span class="pais"><span id="pais-ver" aria-hidden="true">🇵🇾 +595</span><select id="f-pais" aria-label="País y código de teléfono"></select></span>
+        <input id="f-tel" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="981 123 456" required>
+      </span>
+    </div>
+    <label class="f">
+      <span>Tu negocio</span>
+      <select id="f-negocio">
+        <option>Gastronomía o comida</option><option>Salud</option><option>Estética</option><option>Gimnasio</option>
+        <option>Instituto o academia</option><option>Tienda</option><option>Servicios profesionales</option>
+        <option>Emprendimiento nuevo</option><option>Otro</option>
+      </select>
+    </label>
+    <label class="f">
+      <span>¿Qué querés resolver? <em>(opcional)</em></span>
+      <textarea id="f-msg" rows="3" maxlength="600" placeholder="Ej.: respondo tarde el WhatsApp y pierdo pedidos"></textarea>
+    </label>
+    <input id="f-miel" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" class="miel">
+    <p class="f-error" id="f-error" role="alert" hidden></p>
+    <button class="btn grande" id="f-enviar" type="submit">Enviar mis datos</button>
+  </form>
+  <div class="gracias" id="gracias" hidden>
+    <p class="gracias-t">¡Recibido! 🙌</p>
+    <p>Ya tengo tus datos y te escribo a tu WhatsApp para coordinar. Mientras tanto, mirá los videos:</p>
+    <div class="redes-fila" data-redes="botones"></div>
+  </div>
+</dialog>
+
+<!-- ============ VENTANA: LOS 4 STICKERS ============ -->
+<dialog class="ventana ventana-pop" id="v-pop" aria-label="Más sobre OvIAmigo">
+  <button class="cerrar" type="button" data-cerrar aria-label="Cerrar">✕</button>
+  <div class="pop-cuerpo" id="pop-cuerpo"></div>
+</dialog>
 
 <script src="config.js"></script>
 <script src="app.js"></script>

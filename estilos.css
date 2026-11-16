@@ -632,3 +632,39 @@ button.pegatina.p2 { animation-delay: -1.2s, 2s; } button.pegatina.p3 { animatio
 @media (min-width: 760px) { .pie-grid { grid-template-columns: auto 1fr auto; } .pie p { grid-column: 2; grid-row: 1; justify-self: center; text-align: center; } .pie .redes-fila { grid-column: 3; } }
 .mas .rub, .mas .idea-c, .mas-videos { color: var(--ink); }
 .mas .rub[aria-selected=true] { color: var(--ink); }
+
+
+/* ---------- inicio en 3 columnas: texto | avatar | robot y botones (llena el espacio vacío de la compu) ---------- */
+.hero-grid { grid-template-areas: "foto" "txt" "lado"; }
+.hero-foto { grid-area: foto; } .hero-txt { grid-area: txt; } .hero-lado { grid-area: lado; }
+.hero-lado { display: grid; gap: 16px; align-content: start; min-width: 0; }
+.hero-lado .robot-lado { position: static; display: flex; flex-direction: row; align-items: flex-end; justify-self: start; gap: 4px; }
+.hero-lado .rl-robot { width: 76px; flex: none; }
+.hero-lado .rl-burbuja { order: 2; margin: 0 0 30px 0; max-width: 240px; font-size: 14px; white-space: nowrap; }
+.hero-lado .hero-botones { margin-bottom: 0; }
+.p3 { bottom: 20%; }
+@media (min-width: 900px) {
+  .hero-grid { grid-template-columns: minmax(0, 1fr) 420px; grid-template-areas: "txt foto" "lado foto"; gap: 22px 64px; align-items: center; }
+  .hero-foto { order: 0; width: 400px; }
+  .hero-txt { align-self: end; }
+  .hero-lado { align-self: start; }
+  .hero-lado .hero-botones { grid-template-columns: auto auto; justify-content: start; }
+  .p3 { left: -15%; }
+}
+@media (min-width: 1180px) {
+  .hero > .ancho { max-width: 1340px; }
+  .hero-grid { grid-template-columns: minmax(0, 1fr) 400px 272px; grid-template-areas: "txt foto lado"; gap: 0 76px; align-items: center; }
+  .hero-txt, .hero-lado { align-self: center; }
+  .titular { font-size: clamp(56px, 6.1vw, 98px); }
+  .hero-lado { gap: 18px; justify-items: stretch; }
+  .titular { font-size: clamp(56px, 5.8vw, 92px); }
+  .hero-lado .robot-lado { flex-direction: column; align-items: center; justify-self: center; gap: 0; }
+  .hero-lado .rl-robot { width: 168px; order: 2; }
+  .hero-lado .rl-burbuja { order: 1; margin: 0 0 12px 0; max-width: 270px; font-size: 15px; white-space: nowrap; text-align: center; border-radius: 16px; }
+  .hero-lado .rl-burbuja::after { content: ""; position: absolute; left: 50%; bottom: -11px; width: 16px; height: 16px; margin-left: -8px; background: inherit; border: 3px solid var(--ink); border-top: 0; border-left: 0; transform: rotate(45deg); }
+  .hero-lado .hero-botones { grid-template-columns: 1fr; }
+  .hero-lado .hero-botones .btn { width: 100%; }
+  .hero-lado .redes-fila { justify-content: center; }
+  .p3 { left: -17%; }
+}
+@media (max-width: 899px) { .p3 { left: -7%; bottom: 20%; } }

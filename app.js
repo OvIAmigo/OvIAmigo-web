@@ -165,7 +165,7 @@
     if (banco) return Promise.resolve(banco);
     if (!cargando) cargando = new Promise(function (listo) {
       var s = document.createElement("script"); s.src = "preguntas.js"; s.async = true;
-      s.onload = function () { banco = window.OVI_BANCO || null; if (banco) $("chat-estado").textContent = miles(banco.total) + " preguntas listas"; listo(banco); };
+      s.onload = function () { banco = window.OVI_BANCO || null; listo(banco); };
       s.onerror = function () { cargando = null; listo(null); };
       document.head.appendChild(s);
     });
@@ -355,66 +355,10 @@
       }, Math.max(0, 450 - (Date.now() - inicio)));
     });
   }
-  burbuja("ia", "¡Hola! Soy el robot de OvIAmigo 🤖 Tengo más de 10.000 preguntas respondidas sobre IA, WhatsApp para negocios y los servicios de Ovi. ¿Cuál es la tuya?");
+  burbuja("ia", "¡Hola! Soy el robot de OvIAmigo 🤖 ¿En qué te puedo ayudar?");
   sugerir(INICIALES);
   chatForm.addEventListener("submit", function (e) { e.preventDefault(); var v = chatIn.value; chatIn.value = ""; preguntar(v); });
   chatIn.addEventListener("focus", cargarBanco);
-
-  /* ================= VIDEOS (se reproducen solos, sin sonido) ================= */
-  var tira = $("tira");
-  function srcVideo(id, sonido) {
-    return "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1&playsinline=1&rel=0&modestbranding=1&iv_load_policy=3" +
-      (sonido ? "&controls=1" : "&mute=1&controls=0&disablekb=1&loop=1&playlist=" + id);
-  }
-  function ponerVideo(marco, id, titulo, sonido) {
-    var viejo = marco.querySelector("iframe");
-    if (viejo) { if (!sonido) return; viejo.remove(); }
-    var f = crear("iframe", sonido ? "" : "mudo"); f.src = srcVideo(id, sonido);
-    f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen"; f.allowFullscreen = true; f.title = titulo || "Video de OvIAmigo";
-    marco.querySelector("img").hidden = true; marco.querySelector(".play").hidden = true;
-    var tag = marco.querySelector(".sonido"); if (tag) tag.hidden = !!sonido;
-    marco.appendChild(f);
-    marco.classList.toggle("con-sonido", !!sonido);
-  }
-  function quitarVideo(marco) {
-    var f = marco.querySelector("iframe"); if (!f) return;
-    f.remove(); marco.classList.remove("con-sonido");
-    marco.querySelector("img").hidden = false; marco.querySelector(".play").hidden = false; marco.querySelector(".sonido").hidden = true;
-  }
-  function pintarVideos(lista) {
-    tira.innerHTML = "";
-    if (!lista.length) {
-      tira.appendChild(crear("p", "sin-videos", "No pude traer los videos en este momento. Están todos en mi canal de YouTube, a un toque de distancia 👇")); return;
-    }
-    // los que están a la vista arrancan solos y mudos; los que salen de pantalla se frenan
-    var vigilante = ("IntersectionObserver" in window && !reduce) ? new IntersectionObserver(function (es) {
-      es.forEach(function (e) {
-        var m = e.target, d = m.dataset;
-        if (e.intersectionRatio >= .6) ponerVideo(m, d.id, d.titulo, false);
-        else if (e.intersectionRatio < .15) quitarVideo(m);
-      });
-    }, { threshold: [0, .15, .6] }) : null;
-    lista.slice(0, 6).forEach(function (v) {
-      var caja = crear("div", "corto"), marco = crear("button", "corto-marco");
-      marco.type = "button"; marco.setAttribute("aria-label", "Ver con sonido: " + (v.titulo || "Short de OvIAmigo"));
-      marco.dataset.id = v.id; marco.dataset.titulo = v.titulo || "";
-      var img = new Image(); img.loading = "lazy"; img.alt = "";
-      img.src = "https://i.ytimg.com/vi/" + v.id + "/oardefault.jpg";
-      img.onerror = function () { img.onerror = null; img.src = "https://i.ytimg.com/vi/" + v.id + "/hqdefault.jpg"; };
-      marco.appendChild(img); marco.appendChild(crear("span", "play", "▶"));
-      var tag = crear("span", "sonido", "🔊 Tocá para el sonido"); tag.hidden = true; marco.appendChild(tag);
-      marco.addEventListener("click", function () { if (!marco.classList.contains("con-sonido")) ponerVideo(marco, v.id, v.titulo, true); });
-      caja.appendChild(marco);
-      if (v.titulo) caja.appendChild(crear("p", "", v.titulo));
-      tira.appendChild(caja);
-      if (vigilante) vigilante.observe(marco);
-    });
-  }
-  for (var k = 0; k < 3; k++) { var hueco = crear("div", "corto vacio"); hueco.appendChild(crear("div", "corto-marco")); tira.appendChild(hueco); }
-  var manuales = (OVI.videos || []).filter(function (id) { return /^[\w-]{11}$/.test(id); }).map(function (id) { return { id: id, titulo: "" }; });
-  fetch("/api/videos").then(function (r) { if (!r.ok) throw 0; return r.json(); })
-    .then(function (d) { var l = (d && d.videos) || []; pintarVideos(l.length ? l : manuales); })
-    .catch(function () { pintarVideos(manuales); });
 
   /* ================= TU RUBRO ================= */
   var RUBROS = [
@@ -515,7 +459,7 @@
       function poner() { ch.textContent = CHISTES[chisteN % CHISTES.length]; ch.classList.remove("pop-chiste-nuevo"); void ch.offsetWidth; ch.classList.add("pop-chiste-nuevo"); }
       poner();
       acc.appendChild(popBoton("🎲 Otro chiste", function () { chisteN++; poner(); efecto(popBox, "fiesta", 14); }, "rosa"));
-      acc.appendChild(popBoton("▶ Ver los videos", function () { irA("videos"); }, "fantasma"));
+      if (OVI.redes && OVI.redes.instagram && OVI.redes.instagram.url) acc.appendChild(popEnlace("▶ Ver mis videos", OVI.redes.instagram.url, "fantasma", true));
     },
     pymes: function (c, acc) {
       c.appendChild(crear("h2", "pop-t", "💼 Para pymes"));
@@ -530,7 +474,6 @@
     video: function (c, acc) {
       c.appendChild(crear("h2", "pop-t", "🗓️ Un video por día"));
       c.appendChild(crear("p", "pop-p", "Trucos, pruebas y metidas de pata con IA, en menos de un minuto. Todos los días, para que aprendas sin darte cuenta."));
-      acc.appendChild(popBoton("▶ Verlos acá mismo", function () { irA("videos"); }, "rosa"));
       [["youtube", "YouTube"], ["tiktok", "TikTok"], ["instagram", "Instagram"]].forEach(function (r) {
         if (OVI.redes && OVI.redes[r[0]] && OVI.redes[r[0]].url) acc.appendChild(popEnlace(r[1], OVI.redes[r[0]].url, "fantasma", true));
       });
@@ -550,7 +493,7 @@
   // el robot de al lado del avatar cambia de frase para llamar la atención
   (function () {
     var bu = $("rl-burbuja"); if (!bu || reduce) return;
-    var fr = ["¿Dudas? Preguntame 👋", "¿Cuánto cuesta una web?", "¿Me sirve la IA?", "Tengo +10.000 respuestas"], i = 0;
+    var fr = ["¿Dudas? Preguntame 👋", "¿Cuánto cuesta una web?", "¿Me sirve la IA?", "¿Querés una web?"], i = 0;
     setInterval(function () { if (document.hidden) return; i = (i + 1) % fr.length; bu.classList.remove("rl-cambia"); void bu.offsetWidth; bu.textContent = fr[i]; bu.classList.add("rl-cambia"); }, 4200);
   })();
 
